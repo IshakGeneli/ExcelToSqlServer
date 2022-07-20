@@ -39,7 +39,7 @@ namespace DalistoTask2
                 };
                 using (AppContext context = new AppContext())
                 {
-                    context.Countries.Add(c);
+                    //context.Countries.Add(c);
                     //context.SaveChanges();
 
                 }
@@ -61,7 +61,7 @@ namespace DalistoTask2
                 };
                 using (AppContext context = new AppContext())
                 {
-                    context.Cities.Add(c);
+                    //context.Cities.Add(c);
                     //context.SaveChanges();
 
                 }
@@ -129,7 +129,7 @@ namespace DalistoTask2
                 new { Index = n, ColumnName = worksheet.Cells[1, n].Value.ToString() }
             );
 
-            for (int row = 2; row < worksheet.Dimension.Rows; row++)
+            for (int row = 2; row <= worksheet.Dimension.Rows; row++)
             {
                 T obj = (T)Activator.CreateInstance(typeof(T));
                 foreach (var prop in typeof(T).GetProperties())
