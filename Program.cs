@@ -25,7 +25,7 @@ namespace DalistoTask2
         }
         static void Main(string[] args)
         {
-            #region Coountry
+            #region Country
             var excelCountryList = GetData<ExcelCountry>(@"C:\Users\ASUS\source\repos\DalistoTask2\Books\ulke.xlsx");
 
             List<Country> list = new List<Country>();
@@ -37,7 +37,13 @@ namespace DalistoTask2
                     Code = excelCountry.Code,
                     Name = excelCountry.Name
                 };
-                list.Add(c);
+                using (AppContext context = new AppContext())
+                {
+                    context.Countries.Add(c);
+                    //context.SaveChanges();
+
+                }
+                //list.Add(c);
             }
             #endregion
 
@@ -53,7 +59,13 @@ namespace DalistoTask2
                     CountryId = excelCity.CountryId,
                     Name = excelCity.Name
                 };
-                list2.Add(c);
+                using (AppContext context = new AppContext())
+                {
+                    context.Cities.Add(c);
+                    //context.SaveChanges();
+
+                }
+                //list2.Add(c);
             }
             #endregion
 
@@ -85,7 +97,7 @@ namespace DalistoTask2
                 districts = context.Districts.ToList();
             }
 
-            var excelTaxOfficeList = GetData<ExcelTaxOffice>(@"C:\Users\ASUS\source\repos\DalistoTask2\Books\vergi.xlsx");
+            var excelTaxOfficeList = GetData<ExcelTaxOffice>(@"C:\Users\ASUS\source\repos\DalistoTask2\Books\vergi-dairesi.xlsx");
 
             var list4 = (from taxOffice in excelTaxOfficeList
                          join distirct in districts on taxOffice.DistrictName equals distirct.Name
@@ -100,9 +112,9 @@ namespace DalistoTask2
 
             using (AppContext context = new AppContext())
             {
-                context.Countries.AddRange(list);
-                context.Cities.AddRange(list2);
-                context.Districts.AddRange(list3);
+                //context.Countries.AddRange(list);
+                //context.Cities.AddRange(list2);
+                //context.Districts.AddRange(list3);
                 context.TaxOffices.AddRange(list4);
                 //context.SaveChanges();
             }
